@@ -3,9 +3,34 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+<h:head>
+
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputText value="Available tariffs"/>
+            <h:commandButton action="#{reportingBean.getReportTariffs}" value="Get" ajax="true" update="tariffs"/>
+        </h:panelGrid>
+        <p:dataTable id="tariffs" var="tariff"
+                     value="#{reportingBean.tariffs}" emptyMessage="No one tariffs found">
+            <p:column headerText="Name">
+                <h:outputText value="#{tariff.tariffName}"/>
+            </p:column>
+            <p:column headerText="Price">
+                <h:outputText value="#{tariff.tariffPrice}"/>
+            </p:column>
+            <p:column headerText="Get clients">
+                <h:panelGrid>
+                    <h:commandButton value="Submit" action="#{reportingBean.getReportClients}"/>
+                    <h:inputHidden value="#{tariff.tariffId}"/>
+                    <h:inputHidden value="#{tariff.tariffName}"/>
+                </h:panelGrid>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
 </html>

@@ -16,7 +16,10 @@ import java.util.List;
 @ManagedBean
 public class ReportingBean {
 
+    private long tariffId;
+    private String tariffName;
     private List<TariffDTO> tariffs;
+
     @EJB
     private PdfService pdfService;
     @EJB
@@ -29,7 +32,7 @@ public class ReportingBean {
     public void getReportClients(){
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse)context.getExternalContext().getResponse();
-        pdfService.createPdf(response);
+        pdfService.createPdf(response, tariffId, tariffName);
         context.responseComplete();
     }
 
@@ -39,5 +42,21 @@ public class ReportingBean {
 
     public void setTariffs(List<TariffDTO> tariffs) {
         this.tariffs = tariffs;
+    }
+
+    public long getTariffId() {
+        return tariffId;
+    }
+
+    public void setTariffId(long tariffId) {
+        this.tariffId = tariffId;
+    }
+
+    public String getTariffName() {
+        return tariffName;
+    }
+
+    public void setTariffName(String tariffName) {
+        this.tariffName = tariffName;
     }
 }
