@@ -5,7 +5,7 @@ import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.tsystems.javaschool.DTO.ClientDTO;
+import com.tsystems.javaschool.DTO.ClientNumberDTO;
 import com.tsystems.javaschool.webservices.ReceiveRSClients;
 
 import javax.ejb.EJB;
@@ -26,7 +26,7 @@ public class PdfService {
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition","attachment; filename=\"clients.pdf\"");
 
-        List<ClientDTO> clients = receiveRSClients.getClients(tariffId);
+        List<ClientNumberDTO> clients = receiveRSClients.getClients(tariffId);
 
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 
@@ -61,12 +61,12 @@ public class PdfService {
             PdfPCell cell5 = new PdfPCell(new Phrase("Client number"));
             table.addCell(cell5);
 
-            for (ClientDTO c : clients){
+            for (ClientNumberDTO c : clients){
                 table.addCell(c.getName());
-                table.addCell(c.getSurname());
-                table.addCell(c.getEmail());
-                table.addCell(String.valueOf(c.getPassport()));
-                table.addCell(String.valueOf(c.getClientsNumber()));
+                table.addCell(c.getClientSurname());
+                table.addCell(c.getClientEmail());
+                table.addCell(String.valueOf(c.getClientPassport()));
+                table.addCell(String.valueOf(c.getClientNumber()));
             }
 
             document.add(table);

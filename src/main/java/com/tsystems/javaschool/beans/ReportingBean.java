@@ -6,14 +6,14 @@ import com.tsystems.javaschool.service.PdfService;
 import com.tsystems.javaschool.webservices.ReceiveRSTariffs;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Stateless
 @ManagedBean
+@ViewScoped
 public class ReportingBean {
 
     private long tariffId;
@@ -25,7 +25,7 @@ public class ReportingBean {
     @EJB
     private ReceiveRSTariffs receiveRSTariffs;
 
-    public void getReportTariffs(){
+    public void receiveReportTariffs(){
         tariffs = receiveRSTariffs.getTariffs();
     }
 

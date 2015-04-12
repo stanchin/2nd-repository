@@ -7,13 +7,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-
+    <title>WebService</title>
 </h:head>
 <h:body>
     <h:form>
         <h:panelGrid columns="2">
             <h:outputText value="Available tariffs"/>
-            <h:commandButton action="#{reportingBean.getReportTariffs}" value="Get" ajax="true" update="tariffs"/>
+            <h:commandButton action="#{reportingBean.receiveReportTariffs}"
+                             ajax="true" value="Get" update="tariffs"/>
         </h:panelGrid>
         <p:dataTable id="tariffs" var="tariff"
                      value="#{reportingBean.tariffs}" emptyMessage="No one tariffs found">
@@ -23,14 +24,18 @@
             <p:column headerText="Price">
                 <h:outputText value="#{tariff.tariffPrice}"/>
             </p:column>
-            <p:column headerText="Get clients">
-                <h:panelGrid>
-                    <h:commandButton value="Submit" action="#{reportingBean.getReportClients}"/>
-                    <h:inputHidden value="#{tariff.tariffId}"/>
-                    <h:inputHidden value="#{tariff.tariffName}"/>
-                </h:panelGrid>
+            <p:column headerText="Id">
+                <h:outputText value="#{tariff.tariffId}"/>
             </p:column>
         </p:dataTable>
+    </h:form>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:inputText value="#{reportingBean.tariffId}" label="Tariff Id"/>
+            <h:inputText value="#{reportingBean.tariffName}" label="Tariff Name"/>
+            <h:commandButton action="#{reportingBean.getReportClients}"
+                             value="Report in '.pdf'"/>
+        </h:panelGrid>
     </h:form>
 </h:body>
 </html>

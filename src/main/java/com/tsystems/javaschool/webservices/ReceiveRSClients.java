@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.webservices;
 
-import com.tsystems.javaschool.DTO.ClientDTO;
+import com.tsystems.javaschool.DTO.ClientNumberDTO;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.client.Client;
@@ -14,7 +14,7 @@ import java.util.List;
 @Stateless
 public class ReceiveRSClients {
 
-    public List<ClientDTO> getClients(long tariffId){
+    public List<ClientNumberDTO> getClients(long tariffId){
 
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://localhost:8080/eCare/service/getClientsByTariff");
@@ -23,7 +23,7 @@ public class ReceiveRSClients {
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get();
 
-        return response.readEntity(new GenericType<List<ClientDTO>>(){});
+        return response.readEntity(new GenericType<List<ClientNumberDTO>>(){});
     }
 
 }
